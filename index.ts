@@ -60,13 +60,14 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
   }
   const payload = pushEvent.payload as any;
   var mydata;
-  for (let index = 0; index < 10; index++) {
+  for (let index = 0; index < payload.commits.length; index++) {
     console.log("this is my number: {0}",index );
     var payloadhere = payload.commits[index];
     console.log("the payloadhere is: " + payloadhere)
     console.table(payload.commits[index]);
     mydata =populate(payloadhere);
     console.log("this is my data: " + mydata);
+    console.table(mydata);
   //   // const element = array[i].push( data: {
   //   //   message: payload.commits[i].message,
   //   //   repo: pushEvent.repo.name,
