@@ -70,7 +70,9 @@ const getCommitInfo = async (username) => {
     const AllpushEvents = data.filter((event) => {
         event.payload.comment != null;
     });
+    console.table(AllpushEvents);
     let res = AllpushEvents.map(a => a.payload);
+    let res2 = res.filter(b => b.comment != null);
     console.table(res);
     if (!pushEvent) {
         core.setFailed('Could not find any recent commits');
