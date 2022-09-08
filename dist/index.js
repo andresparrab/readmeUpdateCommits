@@ -77,8 +77,10 @@ const getCommitInfo = async (username) => {
         return false;
     });
     console.table(AllpushEvents);
+    console.log("-------------------------------------------------------------");
     let res = AllpushEvents.map(a => a.payload);
     console.table(res);
+    console.log("-------------------------------------------------------------");
     if (!pushEvent) {
         core.setFailed('Could not find any recent commits');
         return { error: { type: 404 } };
@@ -86,11 +88,14 @@ const getCommitInfo = async (username) => {
     var payload = pushEvent.payload;
     var mydata;
     for (let index = 0; index < res.length; index++) {
-        console.log("this is how many there are: ", res.length);
+        console.log("this is how many there are: ", index);
+        console.log("*********************************************************");
         var payloadhere = payload.commits[index];
         console.log("the payloadhere is: " + payloadhere);
+        console.log("------/////////////////////////////////////////////--------");
         console.table(payload.commits[index]);
         mydata = populate(payloadhere);
+        console.log("----<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<---------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-----");
         console.log("this is my data: " + mydata);
         console.table(mydata);
     }
