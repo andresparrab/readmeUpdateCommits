@@ -1,0 +1,24 @@
+{
+  "name": "readme-last-10-commits",
+  "version": "2.0.0",
+  "description": "readme-last-10-commits",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  // "repository": {
+  //   "type": "git",
+  //   "url": "git+https://github.com/estarossa0/readme-last-commit.git"
+  // },
+  // "author": "Andres Parra",
+  // "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^10.4.0"
+  },
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/exec": "^1.1.0",
+    "@octokit/rest": "^18.12.0",
+    "axios": "^0.25.0",
+    "fs": "^0.0.1-security"
+  }
+}
