@@ -83,13 +83,13 @@ const getCommitInfo = async (username) => {
         core.setFailed('Could not find any recent commits');
         return { error: { type: 404 } };
     }
-    var payload = res;
+    var payload = pushEvent.payload;
     var mydata;
     for (let index = 0; index < res.length; index++) {
         console.log("this is how many there are: ", res.length);
-        var payloadhere = res[index].comment;
+        var payloadhere = payload.commits[index];
         console.log("the payloadhere is: " + payloadhere);
-        console.table(res[index].action);
+        console.table(payload.commits[index]);
         mydata = populate(payloadhere);
         console.log("this is my data: " + mydata);
         console.table(mydata);
