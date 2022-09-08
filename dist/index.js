@@ -45,6 +45,17 @@ const getCommitInfo = async (username) => {
             core.setFailed(`Failed with ${response?.status ? response?.status : 'undefined error'}`);
         return null;
     });
+    const allData = await github.activity
+        .listPublicEventsForUser({ username: username, per_page: 100 })
+        .then(({ data }) => data)
+        .catch(({ response }) => {
+        if (response?.status === 404)
+            core.setFailed('User not found');
+        else
+            core.setFailed(`Failed with ${response?.status ? response?.status : 'undefined error'}`);
+        return null;
+    });
+    console.table(allData);
     if (!data)
         return { error: { type: 500 } };
     const pushEvent = data.find((event) => {

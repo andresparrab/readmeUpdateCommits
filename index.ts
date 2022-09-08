@@ -42,6 +42,21 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
       return null;
     });
 
+  const allData = await github.activity
+    .listPublicEventsForUser({ username: username, per_page: 100 })
+    .then(({ data }) => data)
+    .catch(({ response }) => {
+      if (response?.status === 404) core.setFailed('User not found');
+      else
+        core.setFailed(
+          `Failed with ${
+            response?.status ? response?.status : 'undefined error'
+          }`
+        );
+      return null;
+    });
+
+    console.table(allData);
   if (!data) return { error: { type: 500 } };
 
   const pushEvent = data.find((event) => {
@@ -68,12 +83,6 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     mydata =populate(payloadhere);
     console.log("this is my data: " + mydata);
     console.table(mydata);
-  //   // const element = array[i].push( data: {
-  //   //   message: payload.commits[i].message,
-  //   //   repo: pushEvent.repo.name,
-  //   //   sha: payload.commits[i].sha,
-  //   // });
-    
   }
   return {
     data: {
