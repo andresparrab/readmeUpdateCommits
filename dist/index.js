@@ -61,8 +61,11 @@ const getCommitInfo = async (username) => {
         return { error: { type: 404 } };
     }
     const payload = pushEvent.payload;
+    var mydata;
     for (let index = 0; index < 10; index++) {
         console.log("this is my number: {0}", index);
+        mydata = populate(payload.commits[index].message, pushEvent.repo.name, payload.commits[index].sha);
+        console.log("this is my data" + mydata.message);
     }
     return {
         data: {
@@ -72,6 +75,15 @@ const getCommitInfo = async (username) => {
         },
     };
 };
+function populate(message, reponame, sha) {
+    return {
+        data: {
+            message: message,
+            repo: reponame,
+            sha: sha,
+        },
+    };
+}
 const assembleGithubUrl = (data) => {
     return `https://github.com/${data.repo}/commit/${data.sha}`;
 };
