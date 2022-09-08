@@ -74,7 +74,7 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     event.payload.comment != null; 
   });
 
-  let res = AllpushEvents.map(a => a.payload.comment);
+  let res = AllpushEvents.map(a => a.payload);
 
   console.table(res);
 
