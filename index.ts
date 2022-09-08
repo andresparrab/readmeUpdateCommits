@@ -62,6 +62,7 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
 
   for (let index = 0; index < 10; index++) {
     console.log("this is my number: {0}",index );
+    console.log(populate(payload.commits[index].message, pushEvent.repo.name,payload.commits[index].sha));
   //   // const element = array[i].push( data: {
   //   //   message: payload.commits[i].message,
   //   //   repo: pushEvent.repo.name,
@@ -78,6 +79,16 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
   };
 };
 
+function populate(message:string, reponame : string, sha: string)
+{
+  return {
+    data: {
+      message: message,
+      repo: reponame,
+      sha: sha,
+    },
+  };
+}
 /**
  * create the commit github url that will be used to get social preview and return it as string
  * @param data: object with data about the commit
