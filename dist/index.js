@@ -66,7 +66,7 @@ const getCommitInfo = async (username) => {
         }
         return false;
     });
-    const AllpushEvents = data.find((event) => {
+    const AllpushEvents = data.filter((event) => {
         if (event.type === 'PushEvent') {
             const payload = event.payload;
             if (!payload.commits || payload.commits.length === 0)
