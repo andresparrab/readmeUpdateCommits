@@ -128,9 +128,10 @@ function populate(payload: any)
 {
   return {
     data: {
-      message: payload.message,
+      message2: payload.message,
       repo: payload.author.email,
       sha: payload.author.name,
+      distinct: payload.distinct
     },
   };
 }
