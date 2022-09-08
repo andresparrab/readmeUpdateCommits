@@ -69,9 +69,10 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     return false;
   });
 
+  var allpayload;
   const AllpushEvents = data.filter((event) => {
     if (event.type === 'PushEvent') {
-      const payload = event.payload as any;
+      allpayload = event.payload as any;
       if (!payload.commits || payload.commits.length === 0) return false;
 
       return true;
@@ -79,7 +80,7 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     return false;
   });
 
-  console.table(AllpushEvents);
+  console.table(allpayload);
 
   if (!pushEvent) {
     core.setFailed('Could not find any recent commits');

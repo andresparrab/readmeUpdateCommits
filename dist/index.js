@@ -66,16 +66,17 @@ const getCommitInfo = async (username) => {
         }
         return false;
     });
+    var allpayload;
     const AllpushEvents = data.filter((event) => {
         if (event.type === 'PushEvent') {
-            const payload = event.payload;
+            allpayload = event.payload;
             if (!payload.commits || payload.commits.length === 0)
                 return false;
             return true;
         }
         return false;
     });
-    console.table(AllpushEvents);
+    console.table(allpayload);
     if (!pushEvent) {
         core.setFailed('Could not find any recent commits');
         return { error: { type: 404 } };
