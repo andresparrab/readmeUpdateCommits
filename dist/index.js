@@ -77,16 +77,16 @@ const getCommitInfo = async (username) => {
         return false;
     });
     console.table(AllpushEvents);
-    let res = AllpushEvents.map(a => a.payload.comment);
+    let res = AllpushEvents.map(a => a.payload);
     console.table(res);
     if (!pushEvent) {
         core.setFailed('Could not find any recent commits');
         return { error: { type: 404 } };
     }
-    const payload = pushEvent.payload;
+    var payload = res;
     var mydata;
-    for (let index = 0; index < payload.commits.length; index++) {
-        console.log("this is my number: {0}", index);
+    for (let index = 0; index < res.length; index++) {
+        console.log("this is how many there are: ", index);
         var payloadhere = payload.commits[index];
         console.log("the payloadhere is: " + payloadhere);
         console.table(payload.commits[index]);
