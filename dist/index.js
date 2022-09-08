@@ -68,7 +68,13 @@ const getCommitInfo = async (username) => {
     });
     var allpayload;
     const AllpushEvents = data.filter((event) => {
-        event.payload.comment != null;
+        if (event.type === 'PushEvent') {
+            const payload = event.payload;
+            if (!payload.commits || payload.commits.length === 0)
+                return false;
+            return true;
+        }
+        return false;
     });
     console.table(AllpushEvents);
     let res = AllpushEvents.map(a => a.payload);
