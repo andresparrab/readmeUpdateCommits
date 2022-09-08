@@ -64,8 +64,10 @@ const getCommitInfo = async (username) => {
     var mydata;
     for (let index = 0; index < 10; index++) {
         console.log("this is my number: {0}", index);
-        mydata = populate(payload.commits[index].message, pushEvent.repo.name, payload.commits[index].sha);
-        console.log("this is my data" + mydata.message);
+        var payloadhere = payload.commits[index];
+        console.log("the payloadhere is: " + payloadhere);
+        mydata = populate(payloadhere);
+        console.log("this is my data: " + mydata);
     }
     return {
         data: {
@@ -75,12 +77,12 @@ const getCommitInfo = async (username) => {
         },
     };
 };
-function populate(message, reponame, sha) {
+function populate(payload) {
     return {
         data: {
-            message: message,
-            repo: reponame,
-            sha: sha,
+            message: payload.message,
+            repo: payload.sha,
+            sha: payload.sha,
         },
     };
 }
