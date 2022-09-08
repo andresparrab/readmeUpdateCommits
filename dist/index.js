@@ -82,9 +82,9 @@ const getCommitInfo = async (username) => {
 function populate(payload) {
     return {
         data: {
-            message: payload,
-            repo: payload,
-            sha: payload,
+            message: payload.message,
+            repo: payload.author,
+            sha: payload.url,
         },
     };
 }
