@@ -90,8 +90,8 @@ function populate(payload: any)
   return {
     data: {
       message: payload.message,
-      repo: payload.author,
-      sha: payload.url,
+      repo: payload.author.email,
+      sha: payload.autohor.name,
     },
   };
 }
