@@ -86,10 +86,10 @@ const getCommitInfo = async (username) => {
     var payload = res;
     var mydata;
     for (let index = 0; index < res.length; index++) {
-        console.log("this is how many there are: ", index);
-        var payloadhere = payload.commits[index];
+        console.log("this is how many there are: ", res.length);
+        var payloadhere = res[index].comment;
         console.log("the payloadhere is: " + payloadhere);
-        console.table(payload.commits[index]);
+        console.table(res[index].action);
         mydata = populate(payloadhere);
         console.log("this is my data: " + mydata);
         console.table(mydata);
