@@ -66,6 +66,7 @@ const getCommitInfo = async (username) => {
         console.log("this is my number: {0}", index);
         var payloadhere = payload.commits[index];
         console.log("the payloadhere is: " + payloadhere);
+        console.table(payload.commits[index]);
         mydata = populate(payloadhere);
         console.log("this is my data: " + mydata);
     }
@@ -80,9 +81,9 @@ const getCommitInfo = async (username) => {
 function populate(payload) {
     return {
         data: {
-            message: payload.message,
-            repo: payload.sha,
-            sha: payload.sha,
+            message: payload,
+            repo: payload,
+            sha: payload,
         },
     };
 }
