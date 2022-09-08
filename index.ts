@@ -91,7 +91,7 @@ function populate(payload: any)
     data: {
       message: payload.message,
       repo: payload.author.email,
-      sha: payload.autohor.name,
+      sha: payload.author.name,
     },
   };
 }
