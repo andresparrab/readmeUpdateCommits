@@ -55,7 +55,6 @@ const getCommitInfo = async (username) => {
             core.setFailed(`Failed with ${response?.status ? response?.status : 'undefined error'}`);
         return null;
     });
-    console.table(allData);
     if (!data)
         return { error: { type: 500 } };
     const pushEvent = data.find((event) => {
@@ -67,6 +66,7 @@ const getCommitInfo = async (username) => {
         }
         return false;
     });
+    console.table(pushEvent);
     if (!pushEvent) {
         core.setFailed('Could not find any recent commits');
         return { error: { type: 404 } };
