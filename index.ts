@@ -59,10 +59,11 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     return { error: { type: 404 } };
   }
   const payload = pushEvent.payload as any;
-
+  var mydata;
   for (let index = 0; index < 10; index++) {
     console.log("this is my number: {0}",index );
-    console.log(populate(payload.commits[index].message, pushEvent.repo.name,payload.commits[index].sha));
+    mydata =populate(payload.commits[index].message, pushEvent.repo.name,payload.commits[index].sha);
+    console.log("this is my data" + mydata.message);
   //   // const element = array[i].push( data: {
   //   //   message: payload.commits[i].message,
   //   //   repo: pushEvent.repo.name,
