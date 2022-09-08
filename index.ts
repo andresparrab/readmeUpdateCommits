@@ -73,7 +73,7 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
   const AllpushEvents = data.filter((event) => {
     if (event.type === 'PushEvent') {
       allpayload = event.payload as any;
-      if (!payload.commits || payload.commits.length === 0) return false;
+      if (!allpayload.commits || allpayload.commits.length === 0) return false;
 
       return true;
     }

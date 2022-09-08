@@ -70,7 +70,7 @@ const getCommitInfo = async (username) => {
     const AllpushEvents = data.filter((event) => {
         if (event.type === 'PushEvent') {
             allpayload = event.payload;
-            if (!payload.commits || payload.commits.length === 0)
+            if (!allpayload.commits || allpayload.commits.length === 0)
                 return false;
             return true;
         }
