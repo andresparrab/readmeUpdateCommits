@@ -17,6 +17,7 @@ interface CommitInfo {
   };
 }
 
+console.log("Starting somethingNEW!!!!!!!");
 /**
  * Fetch the user events, look for the `pushEvent` type and return
  * object with information about the commit
@@ -59,15 +60,15 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
   }
   const payload = pushEvent.payload as any;
 
-  // for (let index = 0; index < 10; index++) {
-  //   console.log("this is my number: {0}",index );
+  for (let index = 0; index < 10; index++) {
+    console.log("this is my number: {0}",index );
   //   // const element = array[i].push( data: {
   //   //   message: payload.commits[i].message,
   //   //   repo: pushEvent.repo.name,
   //   //   sha: payload.commits[i].sha,
   //   // });
     
-  // }
+  }
   return {
     data: {
       message: payload.commits[0].message,

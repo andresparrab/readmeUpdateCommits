@@ -31,6 +31,7 @@ const rest_1 = require("@octokit/rest");
 const promises_1 = require("fs/promises");
 const exec_1 = require("@actions/exec");
 const axios_1 = __importDefault(require("axios"));
+console.log("Starting somethingNEW!!!!!!!");
 const getCommitInfo = async (username) => {
     const github = new rest_1.Octokit({});
     core.notice(`Fetching ${username} public events`);
@@ -60,6 +61,9 @@ const getCommitInfo = async (username) => {
         return { error: { type: 404 } };
     }
     const payload = pushEvent.payload;
+    for (let index = 0; index < 10; index++) {
+        console.log("this is my number: {0}", index);
+    }
     return {
         data: {
             message: payload.commits[0].message,
