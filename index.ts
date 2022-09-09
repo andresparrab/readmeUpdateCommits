@@ -143,7 +143,7 @@ function getthedata(res, payload)
   return {
     data: {
       message: res[element].commits[0].message,
-      repo: payload.author.email,
+      repo: "mememememe",
       sha: res[element].sha,
     }as CommitInfo,
   };
