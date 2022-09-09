@@ -82,7 +82,7 @@ const getCommitInfo = async (username) => {
     let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
     console.table(res);
     console.log("----------------*************************---------------------------------------------");
-    console.table(res.map((pay) => pay.commits[0].message));
+    console.table(res.map((pay) => pay.commits[0]));
     console.log("#################################################################################################");
     console.table(event);
     if (!pushEvent) {
@@ -90,8 +90,8 @@ const getCommitInfo = async (username) => {
         return { error: { type: 404 } };
     }
     var payload = pushEvent.payload;
-    var dataPopulated;
-    dataPopulated = res.forEach(element => {
+    var dataPopulated = res.map((pay) => pay.commits[0].message);
+    var dataPopulated2 = res.forEach(element => {
         return {
             data: {
                 message: element.commits[0].message,
@@ -102,6 +102,7 @@ const getCommitInfo = async (username) => {
     });
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
     console.table(dataPopulated);
+    console.table(dataPopulated2);
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
     return {
         data: {

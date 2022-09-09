@@ -89,7 +89,7 @@ var size = 10;
 
    console.table(res);
    console.log("----------------*************************---------------------------------------------")
-   console.table(res.map((pay) => pay.commits[0].message));
+   console.table(res.map((pay) => pay.commits[0]));
    console.log("#################################################################################################")
    console.table(event);
   if (!pushEvent) {
@@ -111,8 +111,8 @@ var size = 10;
 //    console.table(mydata);
 //  }
 
-var dataPopulated;
-dataPopulated = res.forEach(element => {
+var dataPopulated = res.map((pay) => pay.commits[0].message);
+var dataPopulated2 = res.forEach(element => {
   return{
     data: {
       message: element.commits[0].message,
@@ -125,6 +125,7 @@ dataPopulated = res.forEach(element => {
 
 console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
 console.table(dataPopulated);
+console.table(dataPopulated2);
 console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
   // for (let index = 0; index < AllpushEvents.length; index++) {
   //   console.log("this is how many there are: ",res.length );
