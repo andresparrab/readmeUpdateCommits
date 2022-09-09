@@ -97,7 +97,7 @@ var size = 10;
     return { error: { type: 404 } };
   }
   var payload = pushEvent.payload as any;
-  var mydata;
+ // var mydata;
 //  for (let index = 0; index < 10; index++) {
 //    console.log("this is how many there are: ",index );
 //    console.log("*********************************************************")
@@ -119,13 +119,14 @@ var dataPopulated= res.forEach(element => {
       sha: element.commits[0].sha,
     },
   }as CommitInfo;
-console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
-  console.table(dataPopulated);
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
+
   
   
 });
 
+console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
+console.table(dataPopulated);
+console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
   // for (let index = 0; index < AllpushEvents.length; index++) {
   //   console.log("this is how many there are: ",res.length );
   //   var payloadhere = res[index];
