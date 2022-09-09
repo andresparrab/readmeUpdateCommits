@@ -138,13 +138,13 @@ var dataPopulated = res.map((pay) => pay.commits[0].message);
 
 function getthedata(res, payload)
 {
-  for( let i=0; i> res.length; i++)
+  for( var element of res)
 {
   return {
     data: {
-      message: res[i].commits[0].message,
+      message: element.commits[0].message,
       repo: "mememememe",
-      sha: res[i].sha,
+      sha: element.sha,
     }as CommitInfo,
   };
 };
