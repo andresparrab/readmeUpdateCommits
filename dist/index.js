@@ -90,6 +90,7 @@ const getCommitInfo = async (username) => {
         return { error: { type: 404 } };
     }
     var payload = pushEvent.payload;
+    var mydata;
     var dataPopulated = res.forEach(element => {
         return {
             data: {
@@ -98,6 +99,9 @@ const getCommitInfo = async (username) => {
                 sha: element.commits[0].sha,
             },
         };
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
+        console.table(dataPopulated);
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
     });
     return {
         data: {
