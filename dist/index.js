@@ -109,8 +109,8 @@ function getthedata(res) {
     for (var element of res) {
         lol = {
             message: element.commits[0].message,
-            repo: "mememememe",
-            sha: element.sha,
+            repo: "mememememeAAA",
+            sha: element.commits[0].sha,
         };
         dataarray.push(lol);
     }

@@ -144,8 +144,8 @@ function getthedata(res)
     {
       lol =  {
         message: element.commits[0].message,
-        repo: "mememememe",
-        sha: element.sha,
+        repo: "mememememeAAA",
+        sha: element.commits[0].sha,
       } as CommitInfoData
       dataarray.push(lol)
 
