@@ -102,12 +102,12 @@ const getCommitInfo = async (username) => {
     };
 };
 function getthedata(res, payload) {
-    for (const element in res) {
+    for (let i = 0; i > res.length; i++) {
         return {
             data: {
-                message: res[element].commits[0].message,
+                message: res[i].commits[0].message,
                 repo: "mememememe",
-                sha: res[element].sha,
+                sha: res[i].sha,
             },
         };
     }
