@@ -90,6 +90,15 @@ const getCommitInfo = async (username) => {
         return { error: { type: 404 } };
     }
     var payload = pushEvent.payload;
+    var dataPopulated = res.forEach(element => {
+        return {
+            data: {
+                message: element.commits[0].message,
+                repo: "myAwsomeFakeRepo",
+                sha: element.commits[0].sha,
+            },
+        };
+    });
     return {
         data: {
             message: payload.commits[0].message,
@@ -101,10 +110,9 @@ const getCommitInfo = async (username) => {
 function populate(payload) {
     return {
         data: {
-            message2: payload.message,
+            message: payload.message,
             repo: payload.author.email,
             sha: payload.author.name,
-            distinct: payload.distinct
         },
     };
 }

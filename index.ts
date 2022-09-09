@@ -111,6 +111,18 @@ var size = 10;
 //    console.table(mydata);
 //  }
 
+var dataPopulated= res.forEach(element => { 
+  return{
+    data: {
+      message: element.commits[0].message,
+      repo: "myAwsomeFakeRepo",
+      sha: element.commits[0].sha,
+    },
+  };
+  
+  
+});
+
   // for (let index = 0; index < AllpushEvents.length; index++) {
   //   console.log("this is how many there are: ",res.length );
   //   var payloadhere = res[index];
@@ -130,14 +142,13 @@ var size = 10;
 };
 
 // function populate(message:string, reponame : string, sha: string)
-function populate(payload: any)
+function populate(payload: any): CommitInfo
 {
   return {
     data: {
-      message2: payload.message,
+      message: payload.message,
       repo: payload.author.email,
       sha: payload.author.name,
-      distinct: payload.distinct
     },
   };
 }
