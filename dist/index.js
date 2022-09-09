@@ -110,7 +110,7 @@ function getthedata(res, payload) {
             data: {
                 message: res[element].commits[0].message,
                 repo: payload.author.email,
-                sha: res[element].author.name,
+                sha: res[element].sha,
             },
         };
     }
