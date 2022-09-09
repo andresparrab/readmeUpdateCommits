@@ -111,14 +111,15 @@ var size = 10;
 //    console.table(mydata);
 //  }
 
-var dataPopulated= res.forEach(element => { 
+var dataPopulated;
+dataPopulated = res.forEach(element => {
   return{
     data: {
       message: element.commits[0].message,
       repo: "myAwsomeFakeRepo",
       sha: element.commits[0].sha,
     },
-  }; 
+  }
   
 });
 

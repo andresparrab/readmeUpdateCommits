@@ -90,7 +90,8 @@ const getCommitInfo = async (username) => {
         return { error: { type: 404 } };
     }
     var payload = pushEvent.payload;
-    var dataPopulated = res.forEach(element => {
+    var dataPopulated;
+    dataPopulated = res.forEach(element => {
         return {
             data: {
                 message: element.commits[0].message,
