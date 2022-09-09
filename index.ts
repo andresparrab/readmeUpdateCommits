@@ -89,7 +89,7 @@ var size = 10;
 
    console.table(res);
    console.log("----------------*************************---------------------------------------------")
-  //  console.table(res.map((pay) => pay.commits[0]));
+   console.table(res.map((pay) => pay.commits[0]));
    console.log("#################################################################################################")
    console.table(event);
   if (!pushEvent) {

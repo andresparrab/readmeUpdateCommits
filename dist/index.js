@@ -82,6 +82,7 @@ const getCommitInfo = async (username) => {
     let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
     console.table(res);
     console.log("----------------*************************---------------------------------------------");
+    console.table(res.map((pay) => pay.commits[0]));
     console.log("#################################################################################################");
     console.table(event);
     if (!pushEvent) {
