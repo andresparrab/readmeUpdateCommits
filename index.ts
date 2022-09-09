@@ -135,19 +135,23 @@ var dataPopulated = res.map((pay) => pay.commits[0].message);
   };
 };
 
+var dataarray: CommitInfoData[] =[];
 
 function getthedata(res, payload)
 {
+  var lol;
   for( var element of res)
-{
-  return {
-    data: {
-      message: element.commits[0].message,
-      repo: "mememememe",
-      sha: element.sha,
-    }as CommitInfo,
-  };
-};
+    {
+      lol =  {
+        message: element.commits[0].message,
+        repo: "mememememe",
+        sha: element.sha,
+      } as CommitInfoData
+      dataarray.push(lol)
+
+        return dataarray;
+
+    };
 
 }
 

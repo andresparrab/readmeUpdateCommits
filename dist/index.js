@@ -101,15 +101,17 @@ const getCommitInfo = async (username) => {
         },
     };
 };
+var dataarray = [];
 function getthedata(res, payload) {
+    var lol;
     for (var element of res) {
-        return {
-            data: {
-                message: element.commits[0].message,
-                repo: "mememememe",
-                sha: element.sha,
-            },
+        lol = {
+            message: element.commits[0].message,
+            repo: "mememememe",
+            sha: element.sha,
         };
+        dataarray.push(lol);
+        return dataarray;
     }
     ;
 }
