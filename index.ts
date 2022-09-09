@@ -112,9 +112,9 @@ var size = 10;
 //  }
 var loco : CommitInfoData;
 var dataPopulated = res.map((pay) => pay.commits[0].message);
-  var trythis = getthedata(res, payload);
+
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-  console.table(trythis);
+  console.table(getthedata(res));
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
   // for (let index = 0; index < AllpushEvents.length; index++) {
@@ -137,7 +137,7 @@ var dataPopulated = res.map((pay) => pay.commits[0].message);
 
 var dataarray: CommitInfoData[] =[];
 
-function getthedata(res, payload)
+function getthedata(res)
 {
   var lol;
   for( var element of res)
