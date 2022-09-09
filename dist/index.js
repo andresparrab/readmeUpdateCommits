@@ -91,7 +91,7 @@ const getCommitInfo = async (username) => {
     }
     var payload = pushEvent.payload;
     var dataPopulated = res.map((pay) => pay.commits[0].message);
-    var dataPopulated2 = res.forEach((element) => {
+    var dataPopulated2 = res.forEach(async (element) => {
         return {
             data: {
                 message: element.commits[0].message,

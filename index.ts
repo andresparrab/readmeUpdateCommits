@@ -112,7 +112,7 @@ var size = 10;
 //  }
 
 var dataPopulated = res.map((pay) => pay.commits[0].message);
-var dataPopulated2 = res.forEach((element) : CommitInfo => {
+var dataPopulated2 = res.forEach(async (element: any) : Promise<CommitInfo> => {
   return{
     data: {
       message: element.commits[0].message,
