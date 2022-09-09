@@ -87,9 +87,9 @@ var size = 10;
    let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
 
 
-   console.table(res);
-   console.log("----------------*************************---------------------------------------------")
-   console.table(res.map((pay) => pay.commits[0]));
+  //  console.table(res);
+  //  console.log("----------------*************************---------------------------------------------")
+  //  console.table(res.map((pay) => pay.commits[0]));
    console.log("#################################################################################################")
    console.table(event);
   if (!pushEvent) {
@@ -145,7 +145,7 @@ function getthedata(res, payload)
       message: res[element].commits[0].message,
       repo: payload.author.email,
       sha: res[element].sha,
-    }as CommitInfoData,
+    }as CommitInfo,
   };
 };
 
