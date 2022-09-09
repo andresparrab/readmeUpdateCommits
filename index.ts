@@ -110,23 +110,13 @@ var size = 10;
 //    console.log("this is my data: " + mydata);
 //    console.table(mydata);
 //  }
-
+var loco : CommitInfoData;
 var dataPopulated = res.map((pay) => pay.commits[0].message);
-var dataPopulated2 = res.forEach(async (element: any) : Promise<CommitInfo> => {
-  return{
-    data: {
-      message: element.commits[0].message,
-      repo: "myAwsomeFakeRepo",
-      sha: element.commits[0].sha,
-    },
-  }
-  
-});
+  var trythis = getthedata(res, payload);
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+  console.table(trythis);
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
-console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
-console.table(dataPopulated);
-console.table(dataPopulated2);
-console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
   // for (let index = 0; index < AllpushEvents.length; index++) {
   //   console.log("this is how many there are: ",res.length );
   //   var payloadhere = res[index];
@@ -144,6 +134,22 @@ console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
     },
   };
 };
+
+
+function getthedata(res, payload)
+{
+  for( const element in res)
+{
+  return {
+    data: {
+      message: res[element].commits[0].message,
+      repo: payload.author.email,
+      sha: res[element].author.name,
+    },
+  };
+};
+
+}
 
 // function populate(message:string, reponame : string, sha: string)
 function populate(payload: any): CommitInfo

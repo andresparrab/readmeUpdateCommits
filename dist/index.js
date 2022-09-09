@@ -90,20 +90,12 @@ const getCommitInfo = async (username) => {
         return { error: { type: 404 } };
     }
     var payload = pushEvent.payload;
+    var loco;
     var dataPopulated = res.map((pay) => pay.commits[0].message);
-    var dataPopulated2 = res.forEach(async (element) => {
-        return {
-            data: {
-                message: element.commits[0].message,
-                repo: "myAwsomeFakeRepo",
-                sha: element.commits[0].sha,
-            },
-        };
-    });
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
-    console.table(dataPopulated);
-    console.table(dataPopulated2);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222@@");
+    var trythis = getthedata(res, payload);
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.table(trythis);
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     return {
         data: {
             message: payload.commits[0].message,
@@ -112,6 +104,18 @@ const getCommitInfo = async (username) => {
         },
     };
 };
+function getthedata(res, payload) {
+    for (const element in res) {
+        return {
+            data: {
+                message: res[element].commits[0].message,
+                repo: payload.author.email,
+                sha: res[element].author.name,
+            },
+        };
+    }
+    ;
+}
 function populate(payload) {
     return {
         data: {
