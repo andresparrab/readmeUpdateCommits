@@ -82,8 +82,9 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
 //console.log("-------------------------------------------------------------")
 //console.table(AllpushEvents);
 console.log("-------------------------------------------------------------")
-   let res = AllpushEvents.map(a => a.payload)as any;
-   let event = AllpushEvents.map(a => a.repo.name);
+var size = 10;
+   let res = AllpushEvents.slice(0, size).map(a => a.payload)as any;
+   let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
 
 
    console.table(res);
