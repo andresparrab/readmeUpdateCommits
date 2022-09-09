@@ -77,12 +77,10 @@ const getCommitInfo = async (username) => {
         return false;
     });
     console.log("-------------------------------------------------------------");
-    console.table(AllpushEvents);
-    console.log("-------------------------------------------------------------");
     let res = AllpushEvents.map(a => a.payload);
     console.table(res);
     console.log("----------------*************************---------------------------------------------");
-    console.table(res.commits[0].message);
+    console.table(res((pay) => pay.commits[0].message));
     if (!pushEvent) {
         core.setFailed('Could not find any recent commits');
         return { error: { type: 404 } };
