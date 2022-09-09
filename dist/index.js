@@ -80,6 +80,8 @@ const getCommitInfo = async (username) => {
     var size = 10;
     let res = AllpushEvents.slice(0, size).map(a => a.payload);
     let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
+    console.table(res);
+    console.log("----------------*************************---------------------------------------------");
     console.log("#################################################################################################");
     console.table(event);
     if (!pushEvent) {
