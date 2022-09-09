@@ -118,9 +118,7 @@ var dataPopulated= res.forEach(element => {
       repo: "myAwsomeFakeRepo",
       sha: element.commits[0].sha,
     },
-  }as CommitInfo;
-
-  
+  }; 
   
 });
 
