@@ -149,9 +149,10 @@ function getthedata(res)
       } as CommitInfoData
       dataarray.push(lol)
 
-        return dataarray;
+        
 
     };
+    return dataarray;
 
 }
 

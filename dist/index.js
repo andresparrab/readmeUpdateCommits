@@ -110,9 +110,9 @@ function getthedata(res) {
             sha: element.sha,
         };
         dataarray.push(lol);
-        return dataarray;
     }
     ;
+    return dataarray;
 }
 function populate(payload) {
     return {
