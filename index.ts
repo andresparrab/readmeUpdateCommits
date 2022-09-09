@@ -111,13 +111,13 @@ var size = 10;
 //    console.table(mydata);
 //  }
 
-var dataPopulated = res.map((pay) => pay.commits[0].message);
-var dataPopulated2 = res.forEach(element => {
+var dataPopulated = res.map((pay) => pay.commits[0]);
+var dataPopulated2 = dataPopulated.forEach(element => {
   return{
     data: {
-      message: element.commits[0].message,
+      message: element.message,
       repo: "myAwsomeFakeRepo",
-      sha: element.commits[0].sha,
+      sha: element.sha,
     },
   }
   
