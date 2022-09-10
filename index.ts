@@ -266,7 +266,7 @@ const updateReadmeFile = async (line: string): Promise<boolean> => {
 
   readmeFileLines.splice(
     startI + 1,
-    0,
+    startI + 1 === endI ? 0 : endI - startI - 1,
     line
   
   );
@@ -335,7 +335,7 @@ async function run() {
     core.notice("TOTALLY CORRECT DATA!!")
   }
 var dataReverse = data.slice().reverse();
-  for( var dataElement of data)
+  for( var dataElement of dataReverse)
   // data.slice().reverse().forEach(async function(dataElement)
   {
 

@@ -160,7 +160,7 @@ const updateReadmeFile = async (line) => {
         core.setFailed(`Could not found \`<!-- LATESTCOMMIT:${startI === -1 ? 'START' : 'END'} -->\` in file`);
         return false;
     }
-    readmeFileLines.splice(startI + 1, 0, line);
+    readmeFileLines.splice(startI + 1, startI + 1 === endI ? 0 : endI - startI - 1, line);
     const newFile = readmeFileLines.join('\n');
     if (newFile === readmeFile) {
         core.warning('No new commits nothing changed, not commits been done');
@@ -202,7 +202,7 @@ async function run() {
         core.notice("TOTALLY CORRECT DATA!!");
     }
     var dataReverse = data.slice().reverse();
-    for (var dataElement of data) {
+    for (var dataElement of dataReverse) {
         const commitUrl = assembleGithubUrl(dataElement);
         core.notice(`Found commit in ${dataElement.repo}`);
         core.notice(`Fetching social preview image`);
