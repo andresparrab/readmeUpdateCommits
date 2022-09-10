@@ -92,7 +92,8 @@ function getthedata(allpayload) {
         dataarray.push(lol);
     }
     ;
-    return dataarray;
+    var newData = dataarray[0];
+    return newData;
 }
 function getData(AllpushEvents) {
     const size = 5;

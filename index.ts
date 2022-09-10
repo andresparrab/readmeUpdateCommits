@@ -133,7 +133,8 @@ function getthedata(allpayload)
       } as CommitInfoData
       dataarray.push(lol)
     };
-    return dataarray;
+    var newData =dataarray[0];
+    return newData;
 
 }
 
