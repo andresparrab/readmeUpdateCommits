@@ -168,6 +168,7 @@ const updateReadmeFile = async (line) => {
         readmeFileLines.splice(startI + 1, 0, line);
     }
     else {
+        core.info("inside the else meaning difference is bigger than 18: deifference now is :" + difference);
         readmeFileLines.splice(startI + 1, endI - startI - 1, line);
     }
     const newFile = readmeFileLines.join('\n');
