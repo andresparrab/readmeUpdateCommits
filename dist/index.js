@@ -160,8 +160,8 @@ const updateReadmeFile = async (line) => {
         core.setFailed(`Could not found \`<!-- LATESTCOMMIT:${startI === -1 ? 'START' : 'END'} -->\` in file`);
         return false;
     }
-    if (endI - startI + 1 < 4) {
-        readmeFileLines.splice(startI + 1, startI + 1 === endI ? 1 : 0, line);
+    for (var i = endI - startI + 1; i > 0; i--) {
+        readmeFileLines.splice(startI + 1, startI + 1 === endI ? 1 : i, line);
     }
     const newFile = readmeFileLines.join('\n');
     if (newFile === readmeFile) {
