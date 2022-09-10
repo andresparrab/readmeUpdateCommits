@@ -268,6 +268,7 @@ const updateReadmeFile = async (line: string): Promise<boolean> => {
   var difference = endI-(startI+1)
   core.notice("endid - startid is: " +difference)
 if (difference < 18) {
+
   readmeFileLines.splice(
     startI + 1,
     0,
@@ -276,9 +277,10 @@ if (difference < 18) {
 }
 else
 {
+  difference =1;
   readmeFileLines.splice(
     startI + 1,
-    5,
+    difference,
     line
     );
 }
