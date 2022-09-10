@@ -127,7 +127,7 @@ function getData(AllpushEvents) {
     for (var element of AllpushEvents) {
         lol = {
             message: element.payload.commits[0].message,
-            repo: element.payload.commits[0].repo.name,
+            repo: element.repo.name,
             sha: element.payload.commits[0].sha,
         };
         dataarray.push(lol);
