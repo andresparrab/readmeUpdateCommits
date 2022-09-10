@@ -3,6 +3,7 @@ import { Octokit } from '@octokit/rest';
 import { readFile, writeFile } from 'fs/promises';
 import { exec } from '@actions/exec';
 import axios from 'axios';
+import { appendFile, appendFileSync } from 'fs';
 
 type CommitInfoData = {
   message: string;
@@ -277,7 +278,8 @@ const updateReadmeFile = async (line: string): Promise<boolean> => {
     return false;
   }
 
-  await writeFile('./README.md', newFile);
+  await appendFileSync('./README.md', newFile);
+  // await writeFile('./README.md', newFile);
   core.notice('Updated README');
 
   return true;

@@ -31,6 +31,7 @@ const rest_1 = require("@octokit/rest");
 const promises_1 = require("fs/promises");
 const exec_1 = require("@actions/exec");
 const axios_1 = __importDefault(require("axios"));
+const fs_1 = require("fs");
 console.log("Starting somethingNEW!!!!!!!");
 const getCommitInfo = async (username) => {
     const github = new rest_1.Octokit({});
@@ -166,7 +167,7 @@ const updateReadmeFile = async (line) => {
         core.warning('No new commits nothing changed, not commits been done');
         return false;
     }
-    await (0, promises_1.writeFile)('./README.md', newFile);
+    await (0, fs_1.appendFileSync)('./README.md', newFile);
     core.notice('Updated README');
     return true;
 };
