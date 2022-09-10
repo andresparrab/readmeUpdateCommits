@@ -113,27 +113,28 @@ console.log("=================================================================="
   var newData =getData(AllpushEvents);
   console.log("This is one of the data mode from the string")
   console.table(newData[0]);
-//  var updatedmodal: any
+  var updatedmodal: any
 
  
-//   updatedmodal = { 
-//   data: {
-//       message: "payload.commits[0].message",
-//       repo: "pushEvent?.repo.name",
-//       sha: "payload.commits[0].sha",
-//     },
-//  };
-
-  return {
-    data: {
-      message: payload.commits[0].message,
-      repo: pushEvent?.repo.name,
-      sha: payload.commits[0].sha,
-    },
+ updatedmodal = { 
+  data: {
+    message: payload.commits[0].message,
+    repo: pushEvent?.repo.name,
+    sha: payload.commits[0].sha,
+  },
   };
-  // return {
 
-  //     data: updatedmodal,
+  // return {
+  //   data: {
+  //     message: payload.commits[0].message,
+  //     repo: pushEvent?.repo.name,
+  //     sha: payload.commits[0].sha,
+  //   },
+  // };
+  return {
+
+      data: updatedmodal,
+  }
 
   // return newData[0] as CommitInfo;
 };
