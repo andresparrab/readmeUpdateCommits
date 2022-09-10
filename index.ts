@@ -194,7 +194,7 @@ function getData(AllpushEvents)
     };
     return dataarray2;
 }
-// function populate(message:string, reponame : string, sha: string) adadsf
+// function populate(message:string, reponame : string, sha: string) adad
 // function populate(payload: any): CommitInfo
 // {
 //   return {
