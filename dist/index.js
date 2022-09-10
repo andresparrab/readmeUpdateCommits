@@ -160,7 +160,7 @@ const updateReadmeFile = async (line) => {
         core.setFailed(`Could not found \`<!-- LATESTCOMMIT:${startI === -1 ? 'START' : 'END'} -->\` in file`);
         return false;
     }
-    readmeFileLines.splice(startI + 1, startI + 1 === endI ? 0 : endI + 2 - startI - 1, line);
+    readmeFileLines.splice(startI + 1, startI + 1 === endI ? 0 : 2 - startI - 1, line);
     const newFile = readmeFileLines.join('\n');
     if (newFile === readmeFile) {
         core.warning('No new commits nothing changed, not commits been done');
