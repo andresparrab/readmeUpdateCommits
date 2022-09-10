@@ -98,7 +98,7 @@ const getCommitInfo = async (username) => {
             sha: payload.commits[0].sha,
         },
     };
-    return updatedmodal;
+    return newdata2[0];
 };
 var dataarray = [];
 var dataarray2 = [];

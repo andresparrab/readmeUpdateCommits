@@ -140,7 +140,9 @@ console.log("=================================================================="
   //     sha: payload.commits[0].sha,
   //   },
   // };
-  return updatedmodal;
+  return newdata2[0];
+
+  //return updatedmodal;
 
 
   // return newData[0] as CommitInfo;
