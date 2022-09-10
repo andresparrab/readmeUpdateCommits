@@ -265,8 +265,9 @@ const updateReadmeFile = async (line: string): Promise<boolean> => {
 
   readmeFileLines.splice(
     startI + 1,
-    startI + 1 === endI ? 0 : endI - startI - 1,
+    startI + 1 === endI+6 ? 0 : endI - startI - 1,
     line
+  
   );
 
   const newFile = readmeFileLines.join('\n');
@@ -299,6 +300,7 @@ const commitAndPush = async (data: CommitInfoData) => {
     'commit',
     '-m',
     `update last commit\n\nthe new commit is ${data.repo}@${data.sha}`,
+    // `update last commit\n\nthe new commit is ${data.repo}@${data.sha}`,
   ]);
   await exec('git', ['push']);
 };
