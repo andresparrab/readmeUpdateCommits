@@ -96,7 +96,7 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
 //     core.setFailed('Could not find any recent commits');
 //     return { error: { type: 404 } };
 //   }
-//   var payload = pushEvent.payload as any;
+   var payload = pushEvent.payload as any;
 
 // var loco : CommitInfoData;
 // var dataPopulated = allpayload.map((pay) => pay.commits[0].message);
@@ -117,7 +117,21 @@ console.log("=================================================================="
   var newData =getData(AllpushEvents);
   console.log("This is one of the data mode from the string")
   console.table(newData[0]);
-  return newData[0] as CommitInfo;
+ var updatedmodal: any
+
+  updatedmodal = { 
+  data: {
+      message: payload.commits[0].message,
+      repo: pushEvent?.repo.name,
+      sha: payload.commits[0].sha,
+    },
+ };
+
+  return {
+
+      data: updatedmodal,
+
+  // return newData[0] as CommitInfo;
 };
 
 var dataarray: CommitInfoData[] =[];
