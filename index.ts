@@ -263,13 +263,14 @@ const updateReadmeFile = async (line: string): Promise<boolean> => {
     );
     return false;
   }
-
+if (endI-startI+1 < 4) {
   readmeFileLines.splice(
     startI + 1,
-    startI + 1 === endI ? 1 : 1,
+    startI + 1 === endI ? 1 : 0,
     line
-  
-  );
+    );
+}
+
 
   const newFile = readmeFileLines.join('\n');
 
