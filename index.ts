@@ -277,6 +277,7 @@ async function run() {
   const { data, error } = await getCommitInfo(username);
   if (error || !data) {
     core.notice("The data model is not correct")
+    console.table(data);
     return;
   }
 
