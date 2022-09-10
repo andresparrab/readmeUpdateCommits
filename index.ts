@@ -277,10 +277,9 @@ if (difference < 18) {
 }
 else
 {
-  difference =1;
   readmeFileLines.splice(
     startI + 1,
-    difference,
+    1,
     line
     );
 }
