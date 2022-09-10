@@ -142,7 +142,7 @@ const fetchImageFromUrl = async (url) => {
     return response.data.data.image;
 };
 const createImageMarkdown2 = (data, commitUrl) => {
-    return `${'\n'}[<div>${data.message}] ->  ${data.repo} by  ${author}.</div>[commitUrl]${'\n\n'}[commitUrl]: ${commitUrl} `;
+    return `${'\n'}<div>${data.message}] ->  ${data.repo} by  ${author}.</div>`;
 };
 const updateReadmeFile = async (line) => {
     core.notice(`Reading README.md`);

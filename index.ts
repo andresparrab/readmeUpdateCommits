@@ -234,7 +234,7 @@ const fetchImageFromUrl = async (url: string): Promise<string | null> => {
 // };
 
 const createImageMarkdown2 = (data: CommitInfoData, commitUrl: string): string => {
-  return `${'\n'}[<div>${data.message}] ->  ${data.repo} by  ${author}.</div>[commitUrl]${'\n\n'}[commitUrl]: ${commitUrl} `;
+  return `${'\n'}<div>${data.message}] ->  ${data.repo} by  ${author}.</div>`;
 };
 
 /**
