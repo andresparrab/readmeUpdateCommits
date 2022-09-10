@@ -263,6 +263,10 @@ const updateReadmeFile = async (line: string): Promise<boolean> => {
     );
     return false;
   }
+  core.notice("endid is: " +endI)
+  core.notice("startI is: " +startI)
+  var difference = endI-(startI+1)
+  core.notice("endid - startid is: " +difference)
 if (2 < 11) {
   readmeFileLines.splice(
     startI + 1,
