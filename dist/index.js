@@ -106,6 +106,7 @@ const getCommitInfo = async (username) => {
     };
 };
 var dataarray = [];
+var dataarray2 = [];
 function getthedata(allpayload) {
     var lol;
     for (var element of allpayload) {
@@ -124,16 +125,17 @@ function getData(AllpushEvents) {
     let allpayload = AllpushEvents.slice(0, size).map(a => a.payload);
     let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
     var lol;
-    for (var element of AllpushEvents.slice(0, size)) {
+    AllpushEvents = AllpushEvents.slice(0, size);
+    for (var element of AllpushEvents) {
         lol = {
             message: element.payload.commits[0].message,
             repo: element.repo.name,
             sha: element.payload.commits[0].sha,
         };
-        dataarray.push(lol);
+        dataarray2.push(lol);
     }
     ;
-    return dataarray;
+    return dataarray2;
 }
 function populate(payload) {
     return {
