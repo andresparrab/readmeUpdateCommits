@@ -119,11 +119,12 @@ console.log("=================================================================="
   console.table(newData[0]);
  var updatedmodal: any
 
+ 
   updatedmodal = { 
   data: {
-      message: payload.commits[0].message,
-      repo: pushEvent?.repo.name,
-      sha: payload.commits[0].sha,
+      message: "payload.commits[0].message",
+      repo: "pushEvent?.repo.name",
+      sha: "payload.commits[0].sha",
     },
  };
 
