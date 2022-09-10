@@ -124,7 +124,7 @@ function getData(AllpushEvents) {
     let allpayload = AllpushEvents.slice(0, size).map(a => a.payload);
     let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
     var lol;
-    for (var element of AllpushEvents) {
+    for (var element of AllpushEvents.slice(0, size)) {
         lol = {
             message: element.payload.commits[0].message,
             repo: element.repo.name,
