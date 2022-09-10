@@ -18,7 +18,7 @@ interface CommitInfo {
   };
 }
 
-var author:string;
+var author;
 console.log("Starting somethingNEW!!!!!!!");
 /**
  * Fetch the user events, look for the `pushEvent` type and return
@@ -142,7 +142,7 @@ console.log("=================================================================="
   //     sha: payload.commits[0].sha,
   //   },
   // };
-  author =  data.find(actor => actor.actor.display_login)as any;
+  author =  data.find(actor => actor.actor.display_login != "");
   return {data: newdata2};
 
   //return updatedmodal;
@@ -234,7 +234,7 @@ const fetchImageFromUrl = async (url: string): Promise<string | null> => {
 // };
 
 const createImageMarkdown2 = (data: CommitInfoData, commitUrl: string): string => {
-  return `${'\n'}<div>${data.message}] ->  ${data.repo} by  ${author}.</div>`;
+  return `${'\n'}<div>${data.message} ->  ${data.repo} by  ${author}.</div>`;
 };
 
 /**

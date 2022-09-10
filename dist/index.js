@@ -91,7 +91,7 @@ const getCommitInfo = async (username) => {
     console.log("This is one of the data mode from the string UPDATED VERION");
     console.table(newdata2);
     console.log("????????????????????????????????????????????????????????????????");
-    author = data.find(actor => actor.actor.display_login);
+    author = data.find(actor => actor.actor.display_login != "");
     return { data: newdata2 };
 };
 var dataarray = [];
@@ -142,7 +142,7 @@ const fetchImageFromUrl = async (url) => {
     return response.data.data.image;
 };
 const createImageMarkdown2 = (data, commitUrl) => {
-    return `${'\n'}<div>${data.message}] ->  ${data.repo} by  ${author}.</div>`;
+    return `${'\n'}<div>${data.message} ->  ${data.repo} by  ${author}.</div>`;
 };
 const updateReadmeFile = async (line) => {
     core.notice(`Reading README.md`);
