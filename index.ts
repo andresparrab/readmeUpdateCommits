@@ -113,6 +113,15 @@ console.log("=================================================================="
   var newData =getData(AllpushEvents);
   console.log("This is one of the data mode from the string")
   console.table(newData[0]);
+
+  console.log("????????????????????????????????????????????????????????????????")
+  var newdata2 = getthedata(AllpushEvents);
+  console.log("This is one of the data mode from the string UPDATED VERION")
+  console.table(newdata2[0]);
+  console.log("????????????????????????????????????????????????????????????????")
+
+
+  
   var updatedmodal: CommitInfo
 
  
@@ -137,23 +146,32 @@ console.log("=================================================================="
   // return newData[0] as CommitInfo;
 };
 
-var dataarray: CommitInfoData[] =[];
+var dataarray: CommitInfo[] =[];
 var dataarray2: CommitInfoData[] =[];
 
-function getthedata(allpayload)
+function getthedata(AllpushEvents)
 {
-  var lol;
-  for( var element of allpayload)
+  const size = 5;
+  let allpayload = AllpushEvents.slice(0, size).map(a => a.payload)as any;
+  let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
+  AllpushEvents =AllpushEvents.slice(0, size);
+  var sendData: CommitInfo
+  for( var element of AllpushEvents)
     {
-      lol =  {
-        message: element.commits[0].message,
-        repo: "mememememeAAA",
-        sha: element.commits[0].sha,
-      } as CommitInfoData
-      dataarray.push(lol)
-    };
 
-    return dataarray;
+
+      sendData = {
+        data:
+        {
+          message: element.payload.commits[0].message,
+          repo: element.repo.name,
+          sha: element.payload.commits[0].sha,
+        },
+      }
+
+      dataarray.push(sendData)
+    };
+    return dataarray
 
 }
 
@@ -174,7 +192,6 @@ function getData(AllpushEvents)
       dataarray2.push(lol)
     };
     return dataarray2;
-
 }
 // function populate(message:string, reponame : string, sha: string)
 function populate(payload: any): CommitInfo

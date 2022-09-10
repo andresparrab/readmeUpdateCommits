@@ -85,6 +85,11 @@ const getCommitInfo = async (username) => {
     var newData = getData(AllpushEvents);
     console.log("This is one of the data mode from the string");
     console.table(newData[0]);
+    console.log("????????????????????????????????????????????????????????????????");
+    var newdata2 = getthedata(AllpushEvents);
+    console.log("This is one of the data mode from the string UPDATED VERION");
+    console.table(newdata2[0]);
+    console.log("????????????????????????????????????????????????????????????????");
     var updatedmodal;
     updatedmodal = {
         data: {
@@ -97,15 +102,21 @@ const getCommitInfo = async (username) => {
 };
 var dataarray = [];
 var dataarray2 = [];
-function getthedata(allpayload) {
-    var lol;
-    for (var element of allpayload) {
-        lol = {
-            message: element.commits[0].message,
-            repo: "mememememeAAA",
-            sha: element.commits[0].sha,
+function getthedata(AllpushEvents) {
+    const size = 5;
+    let allpayload = AllpushEvents.slice(0, size).map(a => a.payload);
+    let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
+    AllpushEvents = AllpushEvents.slice(0, size);
+    var sendData;
+    for (var element of AllpushEvents) {
+        sendData = {
+            data: {
+                message: element.payload.commits[0].message,
+                repo: element.repo.name,
+                sha: element.payload.commits[0].sha,
+            },
         };
-        dataarray.push(lol);
+        dataarray.push(sendData);
     }
     ;
     return dataarray;
