@@ -267,7 +267,7 @@ const updateReadmeFile = async (line: string): Promise<boolean> => {
   readmeFileLines.splice(
     startI + 1,
     // startI + 1 === endI ? 0 : endI - startI - 1,
-    2,
+    2-1,
     line
   
   );
