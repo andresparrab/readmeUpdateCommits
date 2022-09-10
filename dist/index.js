@@ -66,7 +66,7 @@ const getCommitInfo = async (username) => {
         }
         return false;
     });
-    var allpayload;
+    var allpayload2;
     const AllpushEvents = data.filter((event) => {
         if (event.type === 'PushEvent') {
             const payload = event.payload;
@@ -78,11 +78,11 @@ const getCommitInfo = async (username) => {
     });
     console.log("-------------------------------------------------------------");
     var size = 10;
-    let res = AllpushEvents.slice(0, size).map(a => a.payload);
+    let allpayload = AllpushEvents.slice(0, size).map(a => a.payload);
     let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
-    console.table(res);
+    console.table(allpayload);
     console.log("----------------*************************---------------------------------------------");
-    console.table(res.map((pay) => pay.commits[0]));
+    console.table(allpayload.map((pay) => pay.commits[0]));
     console.log("#################################################################################################");
     console.table(event);
     if (!pushEvent) {
@@ -91,10 +91,12 @@ const getCommitInfo = async (username) => {
     }
     var payload = pushEvent.payload;
     var loco;
-    var dataPopulated = res.map((pay) => pay.commits[0].message);
+    var dataPopulated = allpayload.map((pay) => pay.commits[0].message);
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    console.table(getthedata(res));
+    console.table(getthedata(allpayload));
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.table(getData(AllpushEvents));
+    console.log("==================================================================");
     return {
         data: {
             message: payload.commits[0].message,
@@ -104,13 +106,29 @@ const getCommitInfo = async (username) => {
     };
 };
 var dataarray = [];
-function getthedata(res) {
+function getthedata(allpayload) {
     var lol;
-    for (var element of res) {
+    for (var element of allpayload) {
         lol = {
             message: element.commits[0].message,
             repo: "mememememeAAA",
             sha: element.commits[0].sha,
+        };
+        dataarray.push(lol);
+    }
+    ;
+    return dataarray;
+}
+function getData(AllpushEvents) {
+    const size = 5;
+    let allpayload = AllpushEvents.slice(0, size).map(a => a.payload);
+    let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
+    var lol;
+    for (var element of AllpushEvents) {
+        lol = {
+            message: element.payload.commits[0].message,
+            repo: element.payload.commits[0].repo.name,
+            sha: element.payload.commits[0].sha,
         };
         dataarray.push(lol);
     }

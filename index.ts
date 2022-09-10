@@ -69,7 +69,7 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     return false;
   });
 
-  var allpayload;
+  var allpayload2;
   const AllpushEvents = data.filter((event) => {
     if (event.type === 'PushEvent') {
       const payload = event.payload as any;
@@ -83,13 +83,13 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
 //console.table(AllpushEvents);
 console.log("-------------------------------------------------------------")
 var size = 10;
-   let res = AllpushEvents.slice(0, size).map(a => a.payload)as any;
+   let allpayload = AllpushEvents.slice(0, size).map(a => a.payload)as any;
    let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
 
 
-   console.table(res);
+   console.table(allpayload);
    console.log("----------------*************************---------------------------------------------")
-   console.table(res.map((pay) => pay.commits[0]));
+   console.table(allpayload.map((pay) => pay.commits[0]));
    console.log("#################################################################################################")
    console.table(event);
   if (!pushEvent) {
@@ -97,35 +97,16 @@ var size = 10;
     return { error: { type: 404 } };
   }
   var payload = pushEvent.payload as any;
- // var mydata;
-//  for (let index = 0; index < 10; index++) {
-//    console.log("this is how many there are: ",index );
-//    console.log("*********************************************************")
-//    var payloadhere = payload.commits[index];
-//    console.log("the payloadhere is: " + payloadhere)
-//    console.log("------/////////////////////////////////////////////--------")
-//    console.table(payload.commits[index]);
-//   mydata =populate(payloadhere);
-//    console.log("----<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<---------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-----")
-//    console.log("this is my data: " + mydata);
-//    console.table(mydata);
-//  }
+
 var loco : CommitInfoData;
-var dataPopulated = res.map((pay) => pay.commits[0].message);
+var dataPopulated = allpayload.map((pay) => pay.commits[0].message);
 
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-  console.table(getthedata(res));
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  console.table(getthedata(allpayload));
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  console.table(getData(AllpushEvents));
+console.log("==================================================================")
 
-  // for (let index = 0; index < AllpushEvents.length; index++) {
-  //   console.log("this is how many there are: ",res.length );
-  //   var payloadhere = res[index];
-  //   console.log("the payloadhere is: " + payloadhere)
-  //   console.table(res[index].action);
-  //   mydata =populate(payloadhere);
-  //   console.log("this is my data: " + mydata);
-  //   console.table(mydata);
-  // }
   return {
     data: {
       message: payload.commits[0].message,
@@ -137,10 +118,10 @@ var dataPopulated = res.map((pay) => pay.commits[0].message);
 
 var dataarray: CommitInfoData[] =[];
 
-function getthedata(res)
+function getthedata(allpayload)
 {
   var lol;
-  for( var element of res)
+  for( var element of allpayload)
     {
       lol =  {
         message: element.commits[0].message,
@@ -148,14 +129,29 @@ function getthedata(res)
         sha: element.commits[0].sha,
       } as CommitInfoData
       dataarray.push(lol)
-
-        
-
     };
     return dataarray;
 
 }
 
+function getData(AllpushEvents)
+{
+  const size = 5;
+  let allpayload = AllpushEvents.slice(0, size).map(a => a.payload)as any;
+  let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
+  var lol;
+  for( var element of AllpushEvents)
+    {
+      lol =  {
+        message: element.payload.commits[0].message,
+        repo: element.payload.commits[0].repo.name,
+        sha: element.payload.commits[0].sha,
+      } as CommitInfoData
+      dataarray.push(lol)
+    };
+    return dataarray;
+
+}
 // function populate(message:string, reponame : string, sha: string)
 function populate(payload: any): CommitInfo
 {
