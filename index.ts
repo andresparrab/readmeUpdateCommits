@@ -69,7 +69,7 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     return false;
   });
 
-  var allpayload2;
+  // var allpayload2;
   const AllpushEvents = data.filter((event) => {
     if (event.type === 'PushEvent') {
       const payload = event.payload as any;
@@ -81,39 +81,41 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
   });
 //console.log("-------------------------------------------------------------")
 //console.table(AllpushEvents);
-console.log("-------------------------------------------------------------")
-var size = 10;
-   let allpayload = AllpushEvents.slice(0, size).map(a => a.payload)as any;
-   let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
+// console.log("-------------------------------------------------------------")
+// var size = 10;
+//    let allpayload = AllpushEvents.slice(0, size).map(a => a.payload)as any;
+//    let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
 
 
-   console.table(allpayload);
-   console.log("----------------*************************---------------------------------------------")
-   console.table(allpayload.map((pay) => pay.commits[0]));
-   console.log("#################################################################################################")
-   console.table(event);
-  if (!pushEvent) {
-    core.setFailed('Could not find any recent commits');
-    return { error: { type: 404 } };
-  }
-  var payload = pushEvent.payload as any;
+//    console.table(allpayload);
+//    console.log("----------------*************************---------------------------------------------")
+//    console.table(allpayload.map((pay) => pay.commits[0]));
+//    console.log("#################################################################################################")
+//    console.table(event);
+//   if (!pushEvent) {
+//     core.setFailed('Could not find any recent commits');
+//     return { error: { type: 404 } };
+//   }
+//   var payload = pushEvent.payload as any;
 
-var loco : CommitInfoData;
-var dataPopulated = allpayload.map((pay) => pay.commits[0].message);
+// var loco : CommitInfoData;
+// var dataPopulated = allpayload.map((pay) => pay.commits[0].message);
 
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-  console.table(getthedata(allpayload));
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//   console.table(getthedata(allpayload));
+//   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
   console.table(getData(AllpushEvents));
 console.log("==================================================================")
 
-  return {
-    data: {
-      message: payload.commits[0].message,
-      repo: pushEvent.repo.name,
-      sha: payload.commits[0].sha,
-    },
-  };
+  // return {
+  //   data: {
+  //     message: payload.commits[0].message,
+  //     repo: pushEvent.repo.name,
+  //     sha: payload.commits[0].sha,
+  //   },
+  // };
+
+  return getData(AllpushEvents) as CommitInfo;
 };
 
 var dataarray: CommitInfoData[] =[];
