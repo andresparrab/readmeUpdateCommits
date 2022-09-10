@@ -231,8 +231,8 @@ const fetchImageFromUrl = async (url: string): Promise<string | null> => {
 //   return `${'\n'}[<img width="380px" height="200px" src="${imageUrl}" />][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
 // };
 
-const createImageMarkdown = (imageUrl: string, commitUrl: string): string => {
-  return `${'\n'}[<src="${commitUrl}" />]{'\n\n'}`;
+const createImageMarkdown2 = (data: CommitInfoData, commitUrl: string): string => {
+  return `${'\n'}[<h4 src="${commitUrl}">${data.message}</h4>][commitUrl]{'\n\n'}`;
 };
 
 /**
@@ -365,7 +365,7 @@ var dataReverse = data.slice().reverse();
   const imageUrl = await fetchImageFromUrl(commitUrl);
   if (!imageUrl) return;
 
-  const markdown = createImageMarkdown(imageUrl, commitUrl);
+  const markdown = createImageMarkdown2(dataElement, commitUrl);
   const updated = await updateReadmeFile(markdown);
 
   if (!updated) return;

@@ -139,8 +139,8 @@ const fetchImageFromUrl = async (url) => {
     }
     return response.data.data.image;
 };
-const createImageMarkdown = (imageUrl, commitUrl) => {
-    return `${'\n'}[<src="${commitUrl}" />]{'\n\n'}`;
+const createImageMarkdown2 = (data, commitUrl) => {
+    return `${'\n'}[<h4 src="${commitUrl}">${data.message}</h4>][commitUrl]{'\n\n'}`;
 };
 const updateReadmeFile = async (line) => {
     core.notice(`Reading README.md`);
@@ -219,7 +219,7 @@ async function run() {
         const imageUrl = await fetchImageFromUrl(commitUrl);
         if (!imageUrl)
             return;
-        const markdown = createImageMarkdown(imageUrl, commitUrl);
+        const markdown = createImageMarkdown2(dataElement, commitUrl);
         const updated = await updateReadmeFile(markdown);
         if (!updated)
             return;
