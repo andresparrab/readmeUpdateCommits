@@ -167,6 +167,9 @@ const updateReadmeFile = async (line) => {
     if (difference < 25) {
         readmeFileLines.splice(startI + 1, 0, line);
     }
+    else {
+        readmeFileLines.splice(startI + 1, 18, line);
+    }
     const newFile = readmeFileLines.join('\n');
     if (newFile === readmeFile) {
         core.warning('No new commits nothing changed, not commits been done');

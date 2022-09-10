@@ -274,6 +274,14 @@ if (difference < 25) {
     line
     );
 }
+else
+{
+  readmeFileLines.splice(
+    startI + 1,
+    18,
+    line
+    );
+}
 
 
   const newFile = readmeFileLines.join('\n');
