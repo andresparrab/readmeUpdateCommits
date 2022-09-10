@@ -80,7 +80,7 @@ const getCommitInfo = async (username) => {
     var newData = getData(AllpushEvents);
     console.log("This is one of the data mode from the string");
     console.table(newData[0]);
-    return getData(AllpushEvents);
+    return newData[0];
 };
 var dataarray = [];
 var dataarray2 = [];

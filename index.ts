@@ -117,7 +117,7 @@ console.log("=================================================================="
   var newData =getData(AllpushEvents);
   console.log("This is one of the data mode from the string")
   console.table(newData[0]);
-  return getData(AllpushEvents) as CommitInfo;
+  return newData[0] as CommitInfo;
 };
 
 var dataarray: CommitInfoData[] =[];
