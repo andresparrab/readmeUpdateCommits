@@ -31,7 +31,6 @@ const rest_1 = require("@octokit/rest");
 const promises_1 = require("fs/promises");
 const exec_1 = require("@actions/exec");
 const axios_1 = __importDefault(require("axios"));
-const fs_1 = require("fs");
 console.log("Starting somethingNEW!!!!!!!");
 const getCommitInfo = async (username) => {
     const github = new rest_1.Octokit({});
@@ -167,7 +166,7 @@ const updateReadmeFile = async (line) => {
         core.warning('No new commits nothing changed, not commits been done');
         return false;
     }
-    await (0, fs_1.appendFileSync)('./README.md', newFile);
+    await (0, promises_1.writeFile)('./README.md', newFile);
     core.notice('Updated README');
     return true;
 };
@@ -202,6 +201,7 @@ async function run() {
     else {
         core.notice("TOTALLY CORRECT DATA!!");
     }
+    var markdown;
     for (var dataElement of data) {
         const commitUrl = assembleGithubUrl(dataElement);
         core.notice(`Found commit in ${dataElement.repo}`);
@@ -209,11 +209,11 @@ async function run() {
         const imageUrl = await fetchImageFromUrl(commitUrl);
         if (!imageUrl)
             return;
-        const markdown = createImageMarkdown(imageUrl, commitUrl);
-        const updated = await updateReadmeFile(markdown);
-        if (!updated)
-            return;
+        markdown = createImageMarkdown(imageUrl, commitUrl);
     }
+    const updated = await updateReadmeFile(markdown);
+    if (!updated)
+        return;
     commitAndPush(data[0]);
 }
 run();

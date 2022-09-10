@@ -278,8 +278,8 @@ const updateReadmeFile = async (line: string): Promise<boolean> => {
     return false;
   }
 
-  await appendFileSync('./README.md', newFile);
-  // await writeFile('./README.md', newFile);
+  // await appendFileSync('./README.md', newFile);
+  await writeFile('./README.md', newFile);
   core.notice('Updated README');
 
   return true;
@@ -334,7 +334,7 @@ async function run() {
   else{
     core.notice("TOTALLY CORRECT DATA!!")
   }
-
+var markdown;
   for( var dataElement of data)
   {
 
@@ -345,12 +345,13 @@ async function run() {
   const imageUrl = await fetchImageFromUrl(commitUrl);
   if (!imageUrl) return;
 
-  const markdown = createImageMarkdown(imageUrl, commitUrl);
+  markdown = createImageMarkdown(imageUrl, commitUrl);
 
+ 
+  }
   const updated = await updateReadmeFile(markdown);
 
   if (!updated) return;
-  }
 
   commitAndPush(data[0]);
 }
