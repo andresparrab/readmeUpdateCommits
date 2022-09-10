@@ -114,7 +114,9 @@ console.log("=================================================================="
   //     sha: payload.commits[0].sha,
   //   },
   // };
-
+  var newData =getData(AllpushEvents);
+  console.log("This is one of the data mode from the string")
+  console.table(newData[0]);
   return getData(AllpushEvents) as CommitInfo;
 };
 
@@ -133,10 +135,8 @@ function getthedata(allpayload)
       } as CommitInfoData
       dataarray.push(lol)
     };
-    var newData =dataarray[0];
-    console.log("This is one of the data mode from the string")
-    console.table(newData);
-    return newData;
+
+    return dataarray;
 
 }
 
