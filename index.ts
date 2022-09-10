@@ -354,6 +354,6 @@ var markdown;
 
   if (!updated) return;
 
-  commitAndPush(data[0]);
+  commitAndPush(data[data.length]);
 }
 run();

@@ -214,7 +214,7 @@ async function run() {
     const updated = await updateReadmeFile(markdown);
     if (!updated)
         return;
-    commitAndPush(data[0]);
+    commitAndPush(data[data.length]);
 }
 run();
 //# sourceMappingURL=index.js.map
