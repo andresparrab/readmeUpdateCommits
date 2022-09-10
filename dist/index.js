@@ -88,7 +88,7 @@ const getCommitInfo = async (username) => {
     console.log("????????????????????????????????????????????????????????????????");
     var newdata2 = getthedata(AllpushEvents);
     console.log("This is one of the data mode from the string UPDATED VERION");
-    console.table(newdata2[0]);
+    console.table({ data: newdata2 });
     console.log("????????????????????????????????????????????????????????????????");
     return { data: newdata2 };
 };
@@ -192,7 +192,7 @@ async function run() {
         core.setFailed('Username could not be found');
         return;
     }
-    const { data: CommitInfoData, error } = await getCommitInfo(username);
+    var { data, error } = await getCommitInfo(username);
     if (error || !data) {
         core.notice("The data model is not correct");
         console.table(data);
@@ -201,9 +201,9 @@ async function run() {
     else {
         core.notice("TOTALLY CORRECT DATA!!");
     }
-    for (var data of data) {
-        const commitUrl = assembleGithubUrl(data);
-        core.notice(`Found commit in ${data.repo}`);
+    for (var dataElement of data) {
+        const commitUrl = assembleGithubUrl(dataElement);
+        core.notice(`Found commit in ${dataElement.repo}`);
         core.notice(`Fetching social preview image`);
         const imageUrl = await fetchImageFromUrl(commitUrl);
         if (!imageUrl)
@@ -213,7 +213,7 @@ async function run() {
         if (!updated)
             return;
     }
-    commitAndPush(data);
+    commitAndPush(data[0]);
 }
 run();
 //# sourceMappingURL=index.js.map
