@@ -279,7 +279,7 @@ else
 {
   readmeFileLines.splice(
     startI + 1,
-    1,
+    endI-startI-1,
     line
     );
 }
