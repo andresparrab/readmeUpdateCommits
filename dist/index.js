@@ -210,10 +210,10 @@ async function run() {
         if (!imageUrl)
             return;
         markdown = createImageMarkdown(imageUrl, commitUrl);
+        const updated = await updateReadmeFile(markdown);
+        if (!updated)
+            return;
     }
-    const updated = await updateReadmeFile(markdown);
-    if (!updated)
-        return;
     commitAndPush(data[4]);
 }
 run();
