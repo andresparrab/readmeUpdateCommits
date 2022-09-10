@@ -227,10 +227,12 @@ const fetchImageFromUrl = async (url: string): Promise<string | null> => {
   return response.data.data.image;
 };
 
-const createImageMarkdown = (imageUrl: string, commitUrl: string): string => {
-  // return `${'\n'}[<img width="380px" height="200px" src="${imageUrl}" />][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
-  return `${'\n'}[<h4 />][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
+// const createImageMarkdown = (imageUrl: string, commitUrl: string): string => {
+//   return `${'\n'}[<img width="380px" height="200px" src="${imageUrl}" />][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
+// };
 
+const createImageMarkdown = (imageUrl: string, commitUrl: string): string => {
+  return `${'\n'}[<src="${commitUrl}" />]{'\n\n'}`;
 };
 
 /**
