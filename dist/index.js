@@ -31,6 +31,7 @@ const rest_1 = require("@octokit/rest");
 const promises_1 = require("fs/promises");
 const exec_1 = require("@actions/exec");
 const axios_1 = __importDefault(require("axios"));
+var author;
 console.log("Starting somethingNEW!!!!!!!");
 const getCommitInfo = async (username) => {
     const github = new rest_1.Octokit({});
@@ -90,6 +91,7 @@ const getCommitInfo = async (username) => {
     console.log("This is one of the data mode from the string UPDATED VERION");
     console.table(newdata2);
     console.log("????????????????????????????????????????????????????????????????");
+    author = data.map(actor => actor.actor.display_login);
     return { data: newdata2 };
 };
 var dataarray = [];
@@ -140,7 +142,7 @@ const fetchImageFromUrl = async (url) => {
     return response.data.data.image;
 };
 const createImageMarkdown2 = (data, commitUrl) => {
-    return `${'\n'}[<h4>${data.message}  ->  ${data.repo}</h4>][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
+    return `${'\n'}[<div>${data.message}  ->  ${data.repo} by  ${author}.</div>][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
 };
 const updateReadmeFile = async (line) => {
     core.notice(`Reading README.md`);
