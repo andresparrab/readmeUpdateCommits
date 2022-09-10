@@ -142,7 +142,7 @@ console.log("=================================================================="
   //     sha: payload.commits[0].sha,
   //   },
   // };
-  author =  data.map(actor => actor.actor.display_login)as any;
+  author =  data.find(actor => actor.actor.display_login)as any;
   return {data: newdata2};
 
   //return updatedmodal;
@@ -234,7 +234,7 @@ const fetchImageFromUrl = async (url: string): Promise<string | null> => {
 // };
 
 const createImageMarkdown2 = (data: CommitInfoData, commitUrl: string): string => {
-  return `${'\n'}[<div>${data.message}  ->  ${data.repo} by  ${author}.</div>][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
+  return `${'\n'}[<div>${data.message}][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}  ->  ${data.repo} by  ${author}.</div>`;
 };
 
 /**
