@@ -278,7 +278,7 @@ else
 {
   readmeFileLines.splice(
     startI + 1,
-    22,
+    25,
     line
     );
 }
