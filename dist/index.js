@@ -202,7 +202,7 @@ async function run() {
         core.notice("TOTALLY CORRECT DATA!!");
     }
     var markdown;
-    for (var dataElement of data) {
+    data.slice().reverse().forEach(async function (dataElement) {
         const commitUrl = assembleGithubUrl(dataElement);
         core.notice(`Found commit in ${dataElement.repo}`);
         core.notice(`Fetching social preview image`);
@@ -213,7 +213,7 @@ async function run() {
         const updated = await updateReadmeFile(markdown);
         if (!updated)
             return;
-    }
+    });
     commitAndPush(data[4]);
 }
 run();

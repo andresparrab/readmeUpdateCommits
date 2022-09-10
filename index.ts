@@ -335,7 +335,8 @@ async function run() {
     core.notice("TOTALLY CORRECT DATA!!")
   }
 var markdown;
-  for( var dataElement of data)
+  // for( var dataElement of data)
+  data.slice().reverse().forEach(async function(dataElement)
   {
 
   const commitUrl = assembleGithubUrl(dataElement);
@@ -350,7 +351,7 @@ var markdown;
 
   if (!updated) return;
  
-  }
+  });
 
 
   commitAndPush(data[4]);
