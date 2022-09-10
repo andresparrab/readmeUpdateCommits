@@ -194,7 +194,7 @@ function getData(AllpushEvents)
     };
     return dataarray2;
 }
-// function populate(message:string, reponame : string, sha: string) adasdf45345adf
+// function populate(message:string, reponame : string, sha: string) adasdf4534
 // function populate(payload: any): CommitInfo
 // {
 //   return {
