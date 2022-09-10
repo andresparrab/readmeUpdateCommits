@@ -201,19 +201,20 @@ async function run() {
     else {
         core.notice("TOTALLY CORRECT DATA!!");
     }
-    var markdown;
-    data.slice().reverse().forEach(async function (dataElement) {
+    var dataReverse = data.slice().reverse();
+    for (var dataElement of data) {
         const commitUrl = assembleGithubUrl(dataElement);
         core.notice(`Found commit in ${dataElement.repo}`);
         core.notice(`Fetching social preview image`);
         const imageUrl = await fetchImageFromUrl(commitUrl);
         if (!imageUrl)
             return;
-        markdown = createImageMarkdown(imageUrl, commitUrl);
+        const markdown = createImageMarkdown(imageUrl, commitUrl);
         const updated = await updateReadmeFile(markdown);
         if (!updated)
             return;
-    });
+    }
+    ;
     commitAndPush(data[4]);
 }
 run();

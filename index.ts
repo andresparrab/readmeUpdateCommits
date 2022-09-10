@@ -334,9 +334,9 @@ async function run() {
   else{
     core.notice("TOTALLY CORRECT DATA!!")
   }
-var markdown;
-  // for( var dataElement of data)
-  data.slice().reverse().forEach(async function(dataElement)
+var dataReverse = data.slice().reverse();
+  for( var dataElement of data)
+  // data.slice().reverse().forEach(async function(dataElement)
   {
 
   const commitUrl = assembleGithubUrl(dataElement);
@@ -346,12 +346,12 @@ var markdown;
   const imageUrl = await fetchImageFromUrl(commitUrl);
   if (!imageUrl) return;
 
-  markdown = createImageMarkdown(imageUrl, commitUrl);
+  const markdown = createImageMarkdown(imageUrl, commitUrl);
   const updated = await updateReadmeFile(markdown);
 
   if (!updated) return;
  
-  });
+  };
 
 
   commitAndPush(data[4]);
