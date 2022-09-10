@@ -75,12 +75,31 @@ const getCommitInfo = async (username) => {
         }
         return false;
     });
+    if (!pushEvent) {
+        core.setFailed('Could not find any recent commits');
+        return { error: { type: 404 } };
+    }
+    var payload = pushEvent.payload;
     console.table(getData(AllpushEvents));
     console.log("==================================================================");
     var newData = getData(AllpushEvents);
     console.log("This is one of the data mode from the string");
     console.table(newData[0]);
-    return newData[0];
+    var updatedmodal;
+    updatedmodal = {
+        data: {
+            message: "payload.commits[0].message",
+            repo: "pushEvent?.repo.name",
+            sha: "payload.commits[0].sha",
+        },
+    };
+    return {
+        data: {
+            message: payload.commits[0].message,
+            repo: "pushEvent?.repo.name",
+            sha: payload.commits[0].sha,
+        },
+    };
 };
 var dataarray = [];
 var dataarray2 = [];
@@ -192,6 +211,9 @@ async function run() {
         core.notice("The data model is not correct");
         console.table(data);
         return;
+    }
+    else {
+        core.notice("TOTALLY CORRECT DATA!!");
     }
     const commitUrl = assembleGithubUrl(data);
     core.notice(`Found commit in ${data.repo}`);

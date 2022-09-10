@@ -92,10 +92,10 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
 //    console.table(allpayload.map((pay) => pay.commits[0]));
 //    console.log("#################################################################################################")
 //    console.table(event);
-//   if (!pushEvent) {
-//     core.setFailed('Could not find any recent commits');
-//     return { error: { type: 404 } };
-//   }
+  if (!pushEvent) {
+    core.setFailed('Could not find any recent commits');
+    return { error: { type: 404 } };
+  }
    var payload = pushEvent.payload as any;
 
 // var loco : CommitInfoData;
@@ -106,14 +106,6 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
 //   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
   console.table(getData(AllpushEvents));
 console.log("==================================================================")
-
-  // return {
-  //   data: {
-  //     message: payload.commits[0].message,
-  //     repo: pushEvent.repo.name,
-  //     sha: payload.commits[0].sha,
-  //   },
-  // };
   var newData =getData(AllpushEvents);
   console.log("This is one of the data mode from the string")
   console.table(newData[0]);
@@ -129,8 +121,15 @@ console.log("=================================================================="
  };
 
   return {
+    data: {
+      message: payload.commits[0].message,
+      repo: "pushEvent?.repo.name",
+      sha: payload.commits[0].sha,
+    },
+  };
+  // return {
 
-      data: updatedmodal,
+  //     data: updatedmodal,
 
   // return newData[0] as CommitInfo;
 };
@@ -297,6 +296,9 @@ async function run() {
     core.notice("The data model is not correct")
     console.table(data);
     return;
+  }
+  else{
+    core.notice("TOTALLY CORRECT DATA!!")
   }
 
   const commitUrl = assembleGithubUrl(data);
