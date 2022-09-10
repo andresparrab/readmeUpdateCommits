@@ -164,11 +164,11 @@ const updateReadmeFile = async (line) => {
     core.notice("startI is: " + startI);
     var difference = endI - (startI + 1);
     core.notice("endid - startid is: " + difference);
-    if (difference < 27) {
+    if (difference < 18) {
         readmeFileLines.splice(startI + 1, 0, line);
     }
     else {
-        readmeFileLines.splice(startI + 1, 27, line);
+        readmeFileLines.splice(startI + 1, 5, line);
     }
     const newFile = readmeFileLines.join('\n');
     if (newFile === readmeFile) {
