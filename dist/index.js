@@ -168,7 +168,7 @@ const updateReadmeFile = async (line) => {
         readmeFileLines.splice(startI + 1, 0, line);
     }
     else {
-        readmeFileLines.splice(startI + 1, 18, line);
+        readmeFileLines.splice(startI + 1, 22, line);
     }
     const newFile = readmeFileLines.join('\n');
     if (newFile === readmeFile) {
