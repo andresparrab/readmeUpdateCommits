@@ -275,7 +275,10 @@ async function run() {
   }
 
   const { data, error } = await getCommitInfo(username);
-  if (error || !data) return;
+  if (error || !data) {
+    core.notice("The data model is not correct")
+    return;
+  }
 
   const commitUrl = assembleGithubUrl(data);
   core.notice(`Found commit in ${data.repo}`);
