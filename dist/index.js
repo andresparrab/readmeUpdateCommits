@@ -93,6 +93,8 @@ function getthedata(allpayload) {
     }
     ;
     var newData = dataarray[0];
+    core.info("This is one of the data mode from the string");
+    console.table(newData);
     return newData;
 }
 function getData(AllpushEvents) {
