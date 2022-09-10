@@ -104,26 +104,30 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
 //   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 //   console.table(getthedata(allpayload));
 //   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+
+
+
   console.table(getData(AllpushEvents));
 console.log("==================================================================")
   var newData =getData(AllpushEvents);
   console.log("This is one of the data mode from the string")
   console.table(newData[0]);
- var updatedmodal: any
+//  var updatedmodal: any
 
  
-  updatedmodal = { 
-  data: {
-      message: "payload.commits[0].message",
-      repo: "pushEvent?.repo.name",
-      sha: "payload.commits[0].sha",
-    },
- };
+//   updatedmodal = { 
+//   data: {
+//       message: "payload.commits[0].message",
+//       repo: "pushEvent?.repo.name",
+//       sha: "payload.commits[0].sha",
+//     },
+//  };
 
   return {
     data: {
       message: payload.commits[0].message,
-      repo: "pushEvent?.repo.name",
+      repo: pushEvent?.repo.name,
       sha: payload.commits[0].sha,
     },
   };
