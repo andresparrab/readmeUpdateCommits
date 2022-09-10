@@ -11,7 +11,7 @@ type CommitInfoData = {
 };
 
 interface CommitInfo {
-  data?: CommitInfoData;
+  data?: CommitInfoData[];
   error?: {
     type: 404 | 500;
   };
@@ -122,16 +122,16 @@ console.log("=================================================================="
 
 
   
-  var updatedmodal: CommitInfo
+//   var updatedmodal: CommitInfo
 
  
- updatedmodal = { 
-  data: {
-    message: payload.commits[0].message,
-    repo: pushEvent?.repo.name,
-    sha: payload.commits[0].sha,
-  },
-  };
+//  updatedmodal = { 
+//   data: {
+//     message: payload.commits[0].message,
+//     repo: pushEvent?.repo.name,
+//     sha: payload.commits[0].sha,
+//   },
+//   };
 
   // return {
   //   data: {
@@ -140,7 +140,7 @@ console.log("=================================================================="
   //     sha: payload.commits[0].sha,
   //   },
   // };
-  return newdata2[0];
+  return {data: newdata2};
 
   //return updatedmodal;
 
@@ -148,7 +148,7 @@ console.log("=================================================================="
   // return newData[0] as CommitInfo;
 };
 
-var dataarray: CommitInfo[] =[];
+var dataarray: CommitInfoData[] =[];
 var dataarray2: CommitInfoData[] =[];
 
 function getthedata(AllpushEvents)
@@ -157,19 +157,17 @@ function getthedata(AllpushEvents)
   let allpayload = AllpushEvents.slice(0, size).map(a => a.payload)as any;
   let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
   AllpushEvents =AllpushEvents.slice(0, size);
-  var sendData: CommitInfo
+  var sendData: CommitInfoData
   for( var element of AllpushEvents)
     {
 
 
       sendData = {
-        data:
-        {
           message: element.payload.commits[0].message,
           repo: element.repo.name,
           sha: element.payload.commits[0].sha,
-        },
-      }
+        }as CommitInfoData,
+
 
       dataarray.push(sendData)
     };
@@ -196,16 +194,16 @@ function getData(AllpushEvents)
     return dataarray2;
 }
 // function populate(message:string, reponame : string, sha: string)
-function populate(payload: any): CommitInfo
-{
-  return {
-    data: {
-      message: payload.message,
-      repo: payload.author.email,
-      sha: payload.author.name,
-    },
-  };
-}
+// function populate(payload: any): CommitInfo
+// {
+//   return {
+//     data: {
+//       message: payload.message,
+//       repo: payload.author.email,
+//       sha: payload.author.name,
+//     },
+//   };
+// }
 /**
  * create the commit github url that will be used to get social preview and return it as string
  * @param data: object with data about the commit
@@ -313,7 +311,17 @@ async function run() {
     return;
   }
 
-  const { data, error } = await getCommitInfo(username);
+  // const { data, error } = await getCommitInfo(username);
+  // if (error || !data) {
+  //   core.notice("The data model is not correct")
+  //   console.table(data);
+  //   return;
+  // }
+  // else{
+  //   core.notice("TOTALLY CORRECT DATA!!")
+  // }
+
+  const { data: CommitInfoData, error } = await getCommitInfo(username);
   if (error || !data) {
     core.notice("The data model is not correct")
     console.table(data);
@@ -322,6 +330,9 @@ async function run() {
   else{
     core.notice("TOTALLY CORRECT DATA!!")
   }
+
+  for( var data of data)
+  {
 
   const commitUrl = assembleGithubUrl(data);
   core.notice(`Found commit in ${data.repo}`);
@@ -335,6 +346,7 @@ async function run() {
   const updated = await updateReadmeFile(markdown);
 
   if (!updated) return;
+  }
 
   commitAndPush(data);
 }

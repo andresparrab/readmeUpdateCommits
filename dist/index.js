@@ -90,15 +90,7 @@ const getCommitInfo = async (username) => {
     console.log("This is one of the data mode from the string UPDATED VERION");
     console.table(newdata2[0]);
     console.log("????????????????????????????????????????????????????????????????");
-    var updatedmodal;
-    updatedmodal = {
-        data: {
-            message: payload.commits[0].message,
-            repo: pushEvent?.repo.name,
-            sha: payload.commits[0].sha,
-        },
-    };
-    return newdata2[0];
+    return { data: newdata2 };
 };
 var dataarray = [];
 var dataarray2 = [];
@@ -110,13 +102,11 @@ function getthedata(AllpushEvents) {
     var sendData;
     for (var element of AllpushEvents) {
         sendData = {
-            data: {
-                message: element.payload.commits[0].message,
-                repo: element.repo.name,
-                sha: element.payload.commits[0].sha,
-            },
-        };
-        dataarray.push(sendData);
+            message: element.payload.commits[0].message,
+            repo: element.repo.name,
+            sha: element.payload.commits[0].sha,
+        },
+            dataarray.push(sendData);
     }
     ;
     return dataarray;
@@ -137,15 +127,6 @@ function getData(AllpushEvents) {
     }
     ;
     return dataarray2;
-}
-function populate(payload) {
-    return {
-        data: {
-            message: payload.message,
-            repo: payload.author.email,
-            sha: payload.author.name,
-        },
-    };
 }
 const assembleGithubUrl = (data) => {
     return `https://github.com/${data.repo}/commit/${data.sha}`;
@@ -211,7 +192,7 @@ async function run() {
         core.setFailed('Username could not be found');
         return;
     }
-    const { data, error } = await getCommitInfo(username);
+    const { data: CommitInfoData, error } = await getCommitInfo(username);
     if (error || !data) {
         core.notice("The data model is not correct");
         console.table(data);
@@ -220,16 +201,18 @@ async function run() {
     else {
         core.notice("TOTALLY CORRECT DATA!!");
     }
-    const commitUrl = assembleGithubUrl(data);
-    core.notice(`Found commit in ${data.repo}`);
-    core.notice(`Fetching social preview image`);
-    const imageUrl = await fetchImageFromUrl(commitUrl);
-    if (!imageUrl)
-        return;
-    const markdown = createImageMarkdown(imageUrl, commitUrl);
-    const updated = await updateReadmeFile(markdown);
-    if (!updated)
-        return;
+    for (var data of data) {
+        const commitUrl = assembleGithubUrl(data);
+        core.notice(`Found commit in ${data.repo}`);
+        core.notice(`Fetching social preview image`);
+        const imageUrl = await fetchImageFromUrl(commitUrl);
+        if (!imageUrl)
+            return;
+        const markdown = createImageMarkdown(imageUrl, commitUrl);
+        const updated = await updateReadmeFile(markdown);
+        if (!updated)
+            return;
+    }
     commitAndPush(data);
 }
 run();
