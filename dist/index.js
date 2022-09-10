@@ -80,22 +80,11 @@ const getCommitInfo = async (username) => {
         core.setFailed('Could not find any recent commits');
         return { error: { type: 404 } };
     }
-    var payload = pushEvent.payload;
-    console.table(getData(AllpushEvents));
-    console.log("==================================================================");
-    var newData = getData(AllpushEvents);
-    console.log("This is one of the data mode from the string");
-    console.table(newData[0]);
-    console.log("????????????????????????????????????????????????????????????????");
     var newdata2 = getthedata(AllpushEvents);
-    console.log("This is one of the data mode from the string UPDATED VERION");
-    console.table(newdata2);
-    console.log("????????????????????????????????????????????????????????????????");
     author = data.find(actor => actor.actor.display_login != "");
     return { data: newdata2 };
 };
 var dataarray = [];
-var dataarray2 = [];
 function getthedata(AllpushEvents) {
     const size = 5;
     let allpayload = AllpushEvents.slice(0, size).map(a => a.payload);
@@ -113,23 +102,6 @@ function getthedata(AllpushEvents) {
     ;
     return dataarray;
 }
-function getData(AllpushEvents) {
-    const size = 5;
-    let allpayload = AllpushEvents.slice(0, size).map(a => a.payload);
-    let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
-    var lol;
-    AllpushEvents = AllpushEvents.slice(0, size);
-    for (var element of AllpushEvents) {
-        lol = {
-            message: element.payload.commits[0].message,
-            repo: element.repo.name,
-            sha: element.payload.commits[0].sha,
-        };
-        dataarray2.push(lol);
-    }
-    ;
-    return dataarray2;
-}
 const assembleGithubUrl = (data) => {
     return `https://github.com/${data.repo}/commit/${data.sha}`;
 };
@@ -140,6 +112,9 @@ const fetchImageFromUrl = async (url) => {
         return null;
     }
     return response.data.data.image;
+};
+const createImageMarkdown = (imageUrl, commitUrl) => {
+    return `${'\n'}[<img width="380px" height="200px" src="${imageUrl}" />][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
 };
 const createImageMarkdown2 = (data, commitUrl) => {
     return `${'\n'}<div>${data.message} ->  ${data.repo} by  Andres Parra.</div>`;
@@ -221,7 +196,7 @@ async function run() {
         const imageUrl = await fetchImageFromUrl(commitUrl);
         if (!imageUrl)
             return;
-        const markdown = createImageMarkdown2(dataElement, commitUrl);
+        const markdown = createImageMarkdown(imageUrl, commitUrl);
         const updated = await updateReadmeFile(markdown);
         if (!updated)
             return;

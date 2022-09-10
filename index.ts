@@ -71,7 +71,6 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     return false;
   });
 
-  // var allpayload2;
   const AllpushEvents = data.filter((event) => {
     if (event.type === 'PushEvent') {
       const payload = event.payload as any;
@@ -81,78 +80,20 @@ const getCommitInfo = async (username: string): Promise<CommitInfo> => {
     }
     return false;
   });
-//console.log("-------------------------------------------------------------")
-//console.table(AllpushEvents);
-// console.log("-------------------------------------------------------------")
-// var size = 10;
-//    let allpayload = AllpushEvents.slice(0, size).map(a => a.payload)as any;
-//    let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
 
-
-//    console.table(allpayload);
-//    console.log("----------------*************************---------------------------------------------")
-//    console.table(allpayload.map((pay) => pay.commits[0]));
-//    console.log("#################################################################################################")
-//    console.table(event);
   if (!pushEvent) {
     core.setFailed('Could not find any recent commits');
     return { error: { type: 404 } };
   }
-   var payload = pushEvent.payload as any;
 
-// var loco : CommitInfoData;
-// var dataPopulated = allpayload.map((pay) => pay.commits[0].message);
-
-//   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//   console.table(getthedata(allpayload));
-//   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
-
-
-
-  console.table(getData(AllpushEvents));
-console.log("==================================================================")
-  var newData =getData(AllpushEvents);
-  console.log("This is one of the data mode from the string")
-  console.table(newData[0]);
-
-  console.log("????????????????????????????????????????????????????????????????")
   var newdata2 = getthedata(AllpushEvents);
-  console.log("This is one of the data mode from the string UPDATED VERION")
-  console.table(newdata2);
-  console.log("????????????????????????????????????????????????????????????????")
 
-
-  
-//   var updatedmodal: CommitInfo
-
- 
-//  updatedmodal = { 
-//   data: {
-//     message: payload.commits[0].message,
-//     repo: pushEvent?.repo.name,
-//     sha: payload.commits[0].sha,
-//   },
-//   };
-
-  // return {
-  //   data: {
-  //     message: payload.commits[0].message,
-  //     repo: pushEvent?.repo.name,
-  //     sha: payload.commits[0].sha,
-  //   },
-  // };
   author =  data.find(actor => actor.actor.display_login != "");
   return {data: newdata2};
 
-  //return updatedmodal;
-
-
-  // return newData[0] as CommitInfo;
 };
 
 var dataarray: CommitInfoData[] =[];
-var dataarray2: CommitInfoData[] =[];
 
 function getthedata(AllpushEvents)
 {
@@ -178,35 +119,8 @@ function getthedata(AllpushEvents)
 
 }
 
-function getData(AllpushEvents)
-{
-  const size = 5;
-  let allpayload = AllpushEvents.slice(0, size).map(a => a.payload)as any;
-  let event = AllpushEvents.slice(0, size).map(a => a.repo.name);
-  var lol;
-  AllpushEvents =AllpushEvents.slice(0, size);
-  for( var element of AllpushEvents)
-    {
-      lol =  {
-        message: element.payload.commits[0].message,
-        repo: element.repo.name,
-        sha: element.payload.commits[0].sha,
-      } as CommitInfoData
-      dataarray2.push(lol)
-    };
-    return dataarray2;
-}
-// function populate(message:string, reponame : string, sha: string) adasdf45
-// function populate(payload: any): CommitInfo
-// {
-//   return {
-//     data: {
-//       message: payload.message,
-//       repo: payload.author.email,
-//       sha: payload.author.name,
-//     },
-//   };
-// }
+
+
 /**
  * create the commit github url that will be used to get social preview and return it as string
  * @param data: object with data about the commit
@@ -229,9 +143,9 @@ const fetchImageFromUrl = async (url: string): Promise<string | null> => {
   return response.data.data.image;
 };
 
-// const createImageMarkdown = (imageUrl: string, commitUrl: string): string => {
-//   return `${'\n'}[<img width="380px" height="200px" src="${imageUrl}" />][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
-// };
+const createImageMarkdown = (imageUrl: string, commitUrl: string): string => {
+  return `${'\n'}[<img width="380px" height="200px" src="${imageUrl}" />][commitUrl]${'\n\n'}[commitUrl]: ${commitUrl}`;
+};
 
 const createImageMarkdown2 = (data: CommitInfoData, commitUrl: string): string => {
   return `${'\n'}<div>${data.message} ->  ${data.repo} by  Andres Parra.</div>`;
@@ -336,16 +250,6 @@ async function run() {
     return;
   }
 
-  // const { data, error } = await getCommitInfo(username);
-  // if (error || !data) {
-  //   core.notice("The data model is not correct")
-  //   console.table(data);
-  //   return;
-  // }
-  // else{
-  //   core.notice("TOTALLY CORRECT DATA!!")
-  // }
-
   var { data, error } = await getCommitInfo(username);
   if (error || !data) {
     core.notice("The data model is not correct")
@@ -357,7 +261,6 @@ async function run() {
   }
 var dataReverse = data.slice().reverse();
   for( var dataElement of dataReverse)
-  // data.slice().reverse().forEach(async function(dataElement)
   {
 
   const commitUrl = assembleGithubUrl(dataElement);
@@ -367,7 +270,9 @@ var dataReverse = data.slice().reverse();
   const imageUrl = await fetchImageFromUrl(commitUrl);
   if (!imageUrl) return;
 
-  const markdown = createImageMarkdown2(dataElement, commitUrl);
+  // const markdown = createImageMarkdown(dataElement, commitUrl);
+  const markdown = createImageMarkdown(imageUrl, commitUrl);
+
   const updated = await updateReadmeFile(markdown);
 
   if (!updated) return;
